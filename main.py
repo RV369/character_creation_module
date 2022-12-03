@@ -1,37 +1,53 @@
 from random import randint
 
+# Новый импорт.
+# Из модуля start_game_banner, который расположен в папке graphic_arts,
+# импортируем функцию run_screensaver().
+from graphic_arts.start_game_banner import run_screensaver
+
 
 def attack(char_name: str, char_class: str) -> str:
+    """Генерирует количество очков атаки."""
+    warrior_point = randint(8, 10)
+    mage_point = randint(8, 15)
+    healer_point = randint(2, 4)
     if char_class == 'warrior':
-        return (f'{char_name} нанёс урон противнику равный {randint(8, 10)}')
+        return (f'{char_name} нанёс урон противнику равный {warrior_point}')
     if char_class == 'mage':
-        return (f'{char_name} нанёс урон противнику равный {randint(8, 15)}')
+        return (f'{char_name} нанёс урон противнику равный {mage_point}')
     if char_class == 'healer':
-        return (f'{char_name} нанёс урон противнику равный {randint(2, 4)}')
+        return (f'{char_name} нанёс урон противнику равный {healer_point}')
     return (f'{char_name} не применил специальное умение')
 
 
 def defence(char_name: str, char_class: str) -> str:
+    """Генерирует количество очков защиты."""
+    warrior_damage = randint(15, 20)
+    mage_damage = randint(8, 12)
+    healer_damage = randint(12, 15)
     if char_class == 'warrior':
-        return (f'{char_name} блокировал {randint(15, 20)} урона')
+        return (f'{char_name} блокировал {warrior_damage} урона')
     if char_class == 'mage':
-        return (f'{char_name} блокировал {randint(8, 12)} урона')
+        return (f'{char_name} блокировал {mage_damage} урона')
     if char_class == 'healer':
-        return (f'{char_name} блокировал {randint(12, 15)} урона')
+        return (f'{char_name} блокировал {healer_damage} урона')
     return (f'{char_name} не применил специальное умение')
 
 
 def special(char_name: str, char_class: str) -> str:
+    """Возвращает сообщение о применении специального умения."""
     if char_class == 'warrior':
-        return (f'{char_name} применил специальное умение «Выносливость 105»')
+        return (f'{char_name} применил специальное умение'
+                f' «Выносливость {105}»')
     if char_class == 'mage':
-        return (f'{char_name} применил специальное умение «Атака 45»')
+        return (f'{char_name} применил специальное умение «Атака {45}»')
     if char_class == 'healer':
-        return (f'{char_name} применил специальное умение «Защита 40»')
+        return (f'{char_name} применил специальное умение «Защита {40}»')
     return (f'{char_name} не применил специальное умение')
 
 
 def start_training(char_name: str, char_class: str) -> str:
+    """Запускает цикл тренировки навыков персонажа."""
     if char_class == 'warrior':
         print(f'{char_name}, ты Воитель — отличный боец ближнего боя.')
     if char_class == 'mage':
@@ -39,8 +55,8 @@ def start_training(char_name: str, char_class: str) -> str:
     if char_class == 'healer':
         print(f'{char_name}, ты Лекарь — чародей, способный исцелять раны.')
     print('Потренируйся управлять своими навыками.')
-    print(f'{char_name} введи одну из команд: attack — чтобы'
-          ' атаковать противника, defence — чтобы '
+    print(f'{char_name} введи одну из команд: attack — чтобы '
+          'атаковать противника, defence — чтобы '
           'блокировать атаку противника или '
           'special — чтобы использовать свою суперсилу.')
     print('Если не хочешь тренироваться, введи команду skip.')
@@ -57,6 +73,7 @@ def start_training(char_name: str, char_class: str) -> str:
 
 
 def choice_char_class() -> str:
+    """Позволяет игроку выбрать тип игрового персонажа."""
     approve_choice: str = None
     char_class: str = None
     while approve_choice != 'y':
@@ -81,7 +98,9 @@ def choice_char_class() -> str:
     return char_class
 
 
-def main():
+if __name__ == '__main__':
+    """Главная функция. Она запускает игру."""
+    run_screensaver()
     print('Приветствую тебя, искатель приключений!')
     print('Прежде чем начать игру...')
     char_name: str = input('...назови себя: ')
@@ -91,6 +110,3 @@ def main():
     print('Воитель, Маг, Лекарь')
     char_class: str = choice_char_class()
     print(start_training(char_name, char_class))
-
-
-main()
